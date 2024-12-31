@@ -1,4 +1,5 @@
 import { resolve } from 'node:path'
+import vue from '@vitejs/plugin-vue'
 import { defineWorkspace } from 'vitest/config'
 
 export default defineWorkspace([
@@ -6,11 +7,15 @@ export default defineWorkspace([
   // 'vitest.config.ts',
   {
     extends: 'vitest.config.ts',
+    plugins: [
+      vue(),
+    ],
     test: {
       include: [
         'packages/**/*.browser.{test,spec}.ts',
       ],
       name: 'browser',
+      setupFiles: ['vitest-browser-vue'],
       browser: {
         enabled: true,
         name: 'chromium',
